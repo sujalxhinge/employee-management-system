@@ -54,5 +54,18 @@ public class EmployeeDAO {
 
         return employees;
     }
+    public void update(Employee employee){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        try{
+            transaction = session.beginTransaction();
+            session.merge(employee);
+            transaction.commit();
+        } catch (Exception e) {
+            if(transaction != null){
+                transaction.rollback();
+            }
+        }
+    }
 
 }

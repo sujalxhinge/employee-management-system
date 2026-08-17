@@ -44,5 +44,11 @@ public class Main {
             );
         }
 
+        Employee emp = employeeService.findEmployeeById(1L);
+        emp.setSalary(75000.0);
+        emp.setEmail("updated@example.com");
+        employeeService.updateEmployee(emp);
+
+
     }
 }
