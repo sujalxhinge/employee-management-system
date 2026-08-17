@@ -67,5 +67,25 @@ public class EmployeeDAO {
             }
         }
     }
+    public void delete(Long id){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            Employee employee = session.find(Employee.class,id);
+            if(employee!=null){
+                session.remove(employee);
+            }
+            transaction.commit();
+
+        } catch (Exception e) {
+            if(transaction!=null){
+                transaction.rollback();
+            }
+            throw e;
+        }finally {
+            session.close();
+        }
+    }
 
 }

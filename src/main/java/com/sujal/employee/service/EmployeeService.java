@@ -28,4 +28,7 @@ public class EmployeeService {
     public void updateEmployee(Employee employee) {
         employeeDAO.update(employee);
     }
+    public void deleteEmployee(Long id){
+        employeeDAO.delete(id);
+    }
 }

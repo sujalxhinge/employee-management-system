@@ -21,7 +21,7 @@ public class Main {
         employee.setLastName("Developer");
         employee.setEmail("santosh98@example.com");
         employee.setSalary(50000.0);
-        employeeService.createEmployee(employee);
+       // employeeService.createEmployee(employee);
 
         Employee foundEmployee = employeeService.findEmployeeById(2L);
 
@@ -48,6 +48,8 @@ public class Main {
         emp.setSalary(75000.0);
         emp.setEmail("updated@example.com");
         employeeService.updateEmployee(emp);
+
+        employeeService.deleteEmployee(9L);
 
 
     }
