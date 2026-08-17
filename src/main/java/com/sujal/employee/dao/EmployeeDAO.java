@@ -87,5 +87,35 @@ public class EmployeeDAO {
             session.close();
         }
     }
+    public void updateUsingDirtyChecking(Long id,Double newSalary){
+        Session session = HibernateUtil
+                .getSessionFactory()
+                .openSession();
+
+        Transaction transaction = null;
+
+        try {
+            transaction = session.beginTransaction();
+
+            Employee employee = session.find(Employee.class, id);
+
+            if (employee != null) {
+                employee.setSalary(newSalary);
+            }
+
+            transaction.commit();
+
+        } catch (Exception e) {
+
+            if (transaction != null) {
+                transaction.rollback();
+            }
+
+            throw e;
+
+        } finally {
+            session.close();
+        }
+    }
 
 }

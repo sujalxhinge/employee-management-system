@@ -50,6 +50,7 @@ public class Main {
         employeeService.updateEmployee(emp);
 
         employeeService.deleteEmployee(9L);
+        employeeService.updateSalaryUsingDirtyChecking(1L, 80000.0);
 
 
     }

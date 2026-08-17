@@ -31,4 +31,7 @@ public class EmployeeService {
     public void deleteEmployee(Long id){
         employeeDAO.delete(id);
     }
+    public void updateSalaryUsingDirtyChecking(Long id, Double newSalary) {
+        employeeDAO.updateUsingDirtyChecking(id, newSalary);
+    }
 }
