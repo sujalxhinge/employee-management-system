@@ -7,6 +7,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import java.util.List;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -20,6 +22,27 @@ public class Main {
         employee.setEmail("santosh98@example.com");
         employee.setSalary(50000.0);
         employeeService.createEmployee(employee);
+
+        Employee foundEmployee = employeeService.findEmployeeById(2L);
+
+        System.out.println("Employee found:");
+        System.out.println("ID: " + foundEmployee.getId());
+        System.out.println("First Name: " + foundEmployee.getFirstName());
+        System.out.println("Last Name: " + foundEmployee.getLastName());
+        System.out.println("Email: " + foundEmployee.getEmail());
+        System.out.println("Salary: " + foundEmployee.getSalary());
+
+        List<Employee> employees = employeeService.findAllEmployees();
+
+        for (Employee employe : employees) {
+            System.out.println(
+                    employe.getId() + " | " +
+                            employe.getFirstName() + " | " +
+                            employe.getLastName() + " | " +
+                            employe.getEmail() + " | " +
+                            employe.getSalary()
+            );
+        }
 
     }
 }

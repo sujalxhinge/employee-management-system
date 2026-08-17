@@ -4,6 +4,8 @@ import com.sujal.employee.config.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.List;
+
 public class EmployeeDAO {
     public void save(Employee employee) {
 
@@ -29,9 +31,28 @@ public class EmployeeDAO {
             throw e;
 
         } finally {
-
             session.close();
         }
+    }
+    public Employee findById(Long id) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Employee employee = session.find(Employee.class,id);
+        session.close();
+        return employee;
+    }
+    public List<Employee> findAll() {
+
+        Session session = HibernateUtil
+                .getSessionFactory()
+                .openSession();
+
+        List<Employee> employees = session
+                .createQuery("FROM Employee", Employee.class)
+                .getResultList();
+
+        session.close();
+
+        return employees;
     }
 
 }
