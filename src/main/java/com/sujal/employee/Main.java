@@ -52,6 +52,10 @@ public class Main {
         employeeService.deleteEmployee(9L);
         employeeService.updateSalaryUsingDirtyChecking(1L, 80000.0);
 
+        employeeService.testFirstLevelCache(1L);
+
+        employeeService.testSessionBoundary(1L);
+
 
     }
 }

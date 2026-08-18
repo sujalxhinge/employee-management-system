@@ -117,5 +117,52 @@ public class EmployeeDAO {
             session.close();
         }
     }
+    public void testFirstLevelCache(Long id) {
+
+        Session session = HibernateUtil
+                .getSessionFactory()
+                .openSession();
+
+        try {
+
+            Employee emp1 = session.find(Employee.class, id);
+
+            System.out.println("First employee: " + emp1.getFirstName());
+
+            Employee emp2 = session.find(Employee.class, id);
+
+            System.out.println("Second employee: " + emp2.getFirstName());
+
+            System.out.println("Same object? " + (emp1 == emp2));
+
+        } finally {
+            session.close();
+        }
+    }
+    public void testSessionBoundary(Long id) {
+
+        // Session 1
+        Session session1 = HibernateUtil
+                .getSessionFactory()
+                .openSession();
+
+        Employee emp1 = session1.find(Employee.class, id);
+
+        System.out.println("Session 1: " + emp1.getFirstName());
+
+        session1.close();
+
+
+        // Session 2
+        Session session2 = HibernateUtil
+                .getSessionFactory()
+                .openSession();
+
+        Employee emp2 = session2.find(Employee.class, id);
+
+        System.out.println("Session 2: " + emp2.getFirstName());
+
+        session2.close();
+    }
 
 }

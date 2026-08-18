@@ -34,4 +34,10 @@ public class EmployeeService {
     public void updateSalaryUsingDirtyChecking(Long id, Double newSalary) {
         employeeDAO.updateUsingDirtyChecking(id, newSalary);
     }
+    public void testFirstLevelCache(Long id) {
+        employeeDAO.testFirstLevelCache(id);
+    }
+    public void testSessionBoundary(Long id) {
+        employeeDAO.testSessionBoundary(id);
+    }
 }
