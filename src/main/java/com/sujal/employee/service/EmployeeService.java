@@ -40,4 +40,7 @@ public class EmployeeService {
     public void testSessionBoundary(Long id) {
         employeeDAO.testSessionBoundary(id);
     }
+    public void testEntityLifecycle() {
+        employeeDAO.testEntityLifecycle();
+    }
 }

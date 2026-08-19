@@ -56,6 +56,8 @@ public class Main {
 
         employeeService.testSessionBoundary(1L);
 
+        employeeService.testEntityLifecycle();
+
 
     }
 }

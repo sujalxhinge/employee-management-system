@@ -164,5 +164,27 @@ public class EmployeeDAO {
 
         session2.close();
     }
+    public void testEntityLifecycle() {
+
+        Employee employee = new Employee();
+
+        employee.setFirstName("Lifecycle");
+        employee.setLastName("Test");
+        employee.setEmail("lifecycle@example.com");
+        employee.setSalary(60000.0);
+
+        Session session = HibernateUtil
+                .getSessionFactory()
+                .openSession();
+
+        Transaction transaction = session.beginTransaction();
+
+        session.persist(employee);
+        employee.setSalary(65000.0);
+        transaction.commit();
+
+        session.close();
+        employee.setSalary(70000.0);
+    }
 
 }
