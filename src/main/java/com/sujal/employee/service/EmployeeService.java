@@ -43,4 +43,16 @@ public class EmployeeService {
     public void testEntityLifecycle() {
         employeeDAO.testEntityLifecycle();
     }
+    public void testRemoveLifecycle(Long id) {
+        employeeDAO.testRemoveLifecycle(id);
+    }
+    public void testDetach(Long id) {
+        employeeDAO.testDetach(id);
+    }
+    public void testClear(Long id) {
+        employeeDAO.testClear(id);
+    }
+    public void testRefresh(Long id) {
+        employeeDAO.testRefresh(id);
+    }
 }

@@ -185,6 +185,161 @@ public class EmployeeDAO {
 
         session.close();
         employee.setSalary(70000.0);
-    }
 
+        Session session2 = HibernateUtil
+                .getSessionFactory()
+                .openSession();
+
+        Transaction transaction2 = session2.beginTransaction();
+        Employee managedEmployee = session2.merge(employee);
+        transaction2.commit();
+        session2.close();
+    }
+    public void testRemoveLifecycle(Long id) {
+
+        Session session = HibernateUtil
+                .getSessionFactory()
+                .openSession();
+
+        Transaction transaction = null;
+
+        try {
+            transaction = session.beginTransaction();
+
+            Employee employee = session.find(Employee.class, id);
+
+            if (employee != null) {
+                session.remove(employee);
+            }
+
+            transaction.commit();
+
+        } catch (Exception e) {
+
+            if (transaction != null) {
+                transaction.rollback();
+            }
+
+            throw e;
+
+        } finally {
+            session.close();
+        }
+    }
+    public void testDetach(Long id) {
+
+        Session session = HibernateUtil
+                .getSessionFactory()
+                .openSession();
+
+        Transaction transaction = null;
+
+        try {
+            transaction = session.beginTransaction();
+
+            Employee employee = session.find(Employee.class, id);
+
+            if (employee != null) {
+
+                System.out.println("Before detach: " + employee.getSalary());
+
+                session.detach(employee);
+
+                employee.setSalary(99999.0);
+
+                System.out.println("After detach: " + employee.getSalary());
+            }
+
+            transaction.commit();
+
+        } catch (Exception e) {
+
+            if (transaction != null) {
+                transaction.rollback();
+            }
+
+            throw e;
+
+        } finally {
+            session.close();
+        }
+    }
+    public void testClear(Long id) {
+
+        Session session = HibernateUtil
+                .getSessionFactory()
+                .openSession();
+
+        Transaction transaction = null;
+
+        try {
+            transaction = session.beginTransaction();
+
+            Employee employee = session.find(Employee.class, id);
+
+            if (employee != null) {
+
+                System.out.println("Before clear: " + employee.getSalary());
+
+                session.clear();
+
+                employee.setSalary(99999.0);
+
+                System.out.println("After clear: " + employee.getSalary());
+            }
+
+            transaction.commit();
+
+        } catch (Exception e) {
+
+            if (transaction != null) {
+                transaction.rollback();
+            }
+
+            throw e;
+
+        } finally {
+            session.close();
+        }
+    }
+    public void testRefresh(Long id) {
+
+        Session session = HibernateUtil
+                .getSessionFactory()
+                .openSession();
+
+        Transaction transaction = null;
+
+        try {
+            transaction = session.beginTransaction();
+
+            Employee employee = session.find(Employee.class, id);
+
+            if (employee != null) {
+
+                System.out.println("Before change: " + employee.getSalary());
+
+                employee.setSalary(12345.0);
+
+                System.out.println("Before refresh: " + employee.getSalary());
+
+                session.refresh(employee);
+
+                System.out.println("After refresh: " + employee.getSalary());
+            }
+
+            transaction.commit();
+
+        } catch (Exception e) {
+
+            if (transaction != null) {
+                transaction.rollback();
+            }
+
+            throw e;
+
+        } finally {
+            session.close();
+        }
+    }
 }
