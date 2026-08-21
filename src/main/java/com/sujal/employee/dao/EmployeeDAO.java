@@ -1,12 +1,23 @@
 package com.sujal.employee.dao;
-import com.sujal.employee.entity.Employee;
+
 import com.sujal.employee.config.HibernateUtil;
+import com.sujal.employee.entity.Employee;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
+import jakarta.validation.ValidatorFactory;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.List;
+import java.util.Set;
 
 public class EmployeeDAO {
+
+    // ==========================================
+    // CREATE
+    // ==========================================
+
     public void save(Employee employee) {
 
         Session session = HibernateUtil
@@ -34,12 +45,30 @@ public class EmployeeDAO {
             session.close();
         }
     }
+
+
+    // ==========================================
+    // READ - FIND BY ID
+    // ==========================================
+
     public Employee findById(Long id) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Employee employee = session.find(Employee.class,id);
+
+        Session session = HibernateUtil
+                .getSessionFactory()
+                .openSession();
+
+        Employee employee = session.find(Employee.class, id);
+
         session.close();
+
         return employee;
     }
+
+
+    // ==========================================
+    // READ - FIND ALL
+    // ==========================================
+
     public List<Employee> findAll() {
 
         Session session = HibernateUtil
@@ -54,40 +83,14 @@ public class EmployeeDAO {
 
         return employees;
     }
-    public void update(Employee employee){
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = null;
-        try{
-            transaction = session.beginTransaction();
-            session.merge(employee);
-            transaction.commit();
-        } catch (Exception e) {
-            if(transaction != null){
-                transaction.rollback();
-            }
-        }
-    }
-    public void delete(Long id){
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = null;
-        try {
-            transaction = session.beginTransaction();
-            Employee employee = session.find(Employee.class,id);
-            if(employee!=null){
-                session.remove(employee);
-            }
-            transaction.commit();
 
-        } catch (Exception e) {
-            if(transaction!=null){
-                transaction.rollback();
-            }
-            throw e;
-        }finally {
-            session.close();
-        }
-    }
-    public void updateUsingDirtyChecking(Long id,Double newSalary){
+
+    // ==========================================
+    // UPDATE
+    // ==========================================
+
+    public void update(Employee employee) {
+
         Session session = HibernateUtil
                 .getSessionFactory()
                 .openSession();
@@ -95,6 +98,79 @@ public class EmployeeDAO {
         Transaction transaction = null;
 
         try {
+
+            transaction = session.beginTransaction();
+
+            session.merge(employee);
+
+            transaction.commit();
+
+        } catch (Exception e) {
+
+            if (transaction != null) {
+                transaction.rollback();
+            }
+
+            throw e;
+
+        } finally {
+            session.close();
+        }
+    }
+
+
+    // ==========================================
+    // DELETE
+    // ==========================================
+
+    public void delete(Long id) {
+
+        Session session = HibernateUtil
+                .getSessionFactory()
+                .openSession();
+
+        Transaction transaction = null;
+
+        try {
+
+            transaction = session.beginTransaction();
+
+            Employee employee = session.find(Employee.class, id);
+
+            if (employee != null) {
+                session.remove(employee);
+            }
+
+            transaction.commit();
+
+        } catch (Exception e) {
+
+            if (transaction != null) {
+                transaction.rollback();
+            }
+
+            throw e;
+
+        } finally {
+            session.close();
+        }
+    }
+
+
+    // ==========================================
+    // DIRTY CHECKING
+    // ==========================================
+
+    public void updateUsingDirtyChecking(Long id, Double newSalary) {
+
+        Session session = HibernateUtil
+                .getSessionFactory()
+                .openSession();
+
+        Transaction transaction = null;
+
+        try {
+
             transaction = session.beginTransaction();
 
             Employee employee = session.find(Employee.class, id);
@@ -117,6 +193,12 @@ public class EmployeeDAO {
             session.close();
         }
     }
+
+
+    // ==========================================
+    // FIRST-LEVEL CACHE
+    // ==========================================
+
     public void testFirstLevelCache(Long id) {
 
         Session session = HibernateUtil
@@ -127,18 +209,30 @@ public class EmployeeDAO {
 
             Employee emp1 = session.find(Employee.class, id);
 
-            System.out.println("First employee: " + emp1.getFirstName());
+            System.out.println(
+                    "First employee: " + emp1.getFirstName()
+            );
 
             Employee emp2 = session.find(Employee.class, id);
 
-            System.out.println("Second employee: " + emp2.getFirstName());
+            System.out.println(
+                    "Second employee: " + emp2.getFirstName()
+            );
 
-            System.out.println("Same object? " + (emp1 == emp2));
+            System.out.println(
+                    "Same object? " + (emp1 == emp2)
+            );
 
         } finally {
             session.close();
         }
     }
+
+
+    // ==========================================
+    // SESSION BOUNDARY
+    // ==========================================
+
     public void testSessionBoundary(Long id) {
 
         // Session 1
@@ -148,7 +242,9 @@ public class EmployeeDAO {
 
         Employee emp1 = session1.find(Employee.class, id);
 
-        System.out.println("Session 1: " + emp1.getFirstName());
+        System.out.println(
+                "Session 1: " + emp1.getFirstName()
+        );
 
         session1.close();
 
@@ -160,10 +256,18 @@ public class EmployeeDAO {
 
         Employee emp2 = session2.find(Employee.class, id);
 
-        System.out.println("Session 2: " + emp2.getFirstName());
+        System.out.println(
+                "Session 2: " + emp2.getFirstName()
+        );
 
         session2.close();
     }
+
+
+    // ==========================================
+    // ENTITY LIFECYCLE
+    // ==========================================
+
     public void testEntityLifecycle() {
 
         Employee employee = new Employee();
@@ -179,11 +283,18 @@ public class EmployeeDAO {
 
         Transaction transaction = session.beginTransaction();
 
+        // TRANSIENT → MANAGED
         session.persist(employee);
+
+        // Dirty checking
         employee.setSalary(65000.0);
+
         transaction.commit();
 
+        // MANAGED → DETACHED
         session.close();
+
+        // Change detached entity
         employee.setSalary(70000.0);
 
         Session session2 = HibernateUtil
@@ -191,10 +302,20 @@ public class EmployeeDAO {
                 .openSession();
 
         Transaction transaction2 = session2.beginTransaction();
+
+        // DETACHED → MANAGED
         Employee managedEmployee = session2.merge(employee);
+
         transaction2.commit();
+
         session2.close();
     }
+
+
+    // ==========================================
+    // REMOVE LIFECYCLE
+    // ==========================================
+
     public void testRemoveLifecycle(Long id) {
 
         Session session = HibernateUtil
@@ -204,6 +325,7 @@ public class EmployeeDAO {
         Transaction transaction = null;
 
         try {
+
             transaction = session.beginTransaction();
 
             Employee employee = session.find(Employee.class, id);
@@ -226,6 +348,12 @@ public class EmployeeDAO {
             session.close();
         }
     }
+
+
+    // ==========================================
+    // DETACH
+    // ==========================================
+
     public void testDetach(Long id) {
 
         Session session = HibernateUtil
@@ -235,19 +363,24 @@ public class EmployeeDAO {
         Transaction transaction = null;
 
         try {
+
             transaction = session.beginTransaction();
 
             Employee employee = session.find(Employee.class, id);
 
             if (employee != null) {
 
-                System.out.println("Before detach: " + employee.getSalary());
+                System.out.println(
+                        "Before detach: " + employee.getSalary()
+                );
 
                 session.detach(employee);
 
                 employee.setSalary(99999.0);
 
-                System.out.println("After detach: " + employee.getSalary());
+                System.out.println(
+                        "After detach: " + employee.getSalary()
+                );
             }
 
             transaction.commit();
@@ -264,6 +397,12 @@ public class EmployeeDAO {
             session.close();
         }
     }
+
+
+    // ==========================================
+    // CLEAR
+    // ==========================================
+
     public void testClear(Long id) {
 
         Session session = HibernateUtil
@@ -273,19 +412,24 @@ public class EmployeeDAO {
         Transaction transaction = null;
 
         try {
+
             transaction = session.beginTransaction();
 
             Employee employee = session.find(Employee.class, id);
 
             if (employee != null) {
 
-                System.out.println("Before clear: " + employee.getSalary());
+                System.out.println(
+                        "Before clear: " + employee.getSalary()
+                );
 
                 session.clear();
 
                 employee.setSalary(99999.0);
 
-                System.out.println("After clear: " + employee.getSalary());
+                System.out.println(
+                        "After clear: " + employee.getSalary()
+                );
             }
 
             transaction.commit();
@@ -302,6 +446,12 @@ public class EmployeeDAO {
             session.close();
         }
     }
+
+
+    // ==========================================
+    // REFRESH
+    // ==========================================
+
     public void testRefresh(Long id) {
 
         Session session = HibernateUtil
@@ -311,21 +461,28 @@ public class EmployeeDAO {
         Transaction transaction = null;
 
         try {
+
             transaction = session.beginTransaction();
 
             Employee employee = session.find(Employee.class, id);
 
             if (employee != null) {
 
-                System.out.println("Before change: " + employee.getSalary());
+                System.out.println(
+                        "Before change: " + employee.getSalary()
+                );
 
                 employee.setSalary(12345.0);
 
-                System.out.println("Before refresh: " + employee.getSalary());
+                System.out.println(
+                        "Before refresh: " + employee.getSalary()
+                );
 
                 session.refresh(employee);
 
-                System.out.println("After refresh: " + employee.getSalary());
+                System.out.println(
+                        "After refresh: " + employee.getSalary()
+                );
             }
 
             transaction.commit();
@@ -340,6 +497,55 @@ public class EmployeeDAO {
 
         } finally {
             session.close();
+        }
+    }
+
+
+    // ==========================================
+    // VALIDATION
+    // ==========================================
+
+    public Set<ConstraintViolation<Employee>> validateEmployee(
+            Employee employee
+    ) {
+
+        ValidatorFactory factory =
+                Validation.buildDefaultValidatorFactory();
+
+        Validator validator = factory.getValidator();
+
+        Set<ConstraintViolation<Employee>> violations =
+                validator.validate(employee);
+
+        factory.close();
+
+        return violations;
+    }
+
+
+    // ==========================================
+    // TEST VALIDATION
+    // ==========================================
+
+    public void testValidation() {
+
+        Employee employee = new Employee();
+
+        employee.setFirstName("A");
+        employee.setLastName("Developer");
+        employee.setEmail("test-example");
+        employee.setSalary(-1.0);
+
+        Set<ConstraintViolation<Employee>> violations =
+                validateEmployee(employee);
+
+        for (ConstraintViolation<Employee> violation : violations) {
+
+            System.out.println(
+                    violation.getPropertyPath()
+                            + " : "
+                            + violation.getMessage()
+            );
         }
     }
 }

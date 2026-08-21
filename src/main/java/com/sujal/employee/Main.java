@@ -98,7 +98,29 @@ public class Main {
         // 12. Clear
         // employeeService.testClear(1L);
 
-        employeeService.testClear(1L);
-        employeeService.testRefresh(1L);
+
+        // 13. Refresh
+        // employeeService.testRefresh(1L);
+
+
+        // 14. Validation
+       // employeeService.testValidation();
+        Employee employee = new Employee();
+
+        employee.setFirstName("Sujal");
+        employee.setLastName("Developer");
+        employee.setEmail("sujal@example.com");
+        employee.setSalary(50000.0);
+
+        //employeeService.createEmployee(employee);
+        employee = employeeService.findEmployeeById(1L);
+
+        if (employee != null) {
+            employee.setFirstName("Sujal");
+            employee.setEmail("sujal@example.com");
+            employee.setSalary(80000.0);
+
+            employeeService.updateEmployee(employee);
+        }
     }
 }

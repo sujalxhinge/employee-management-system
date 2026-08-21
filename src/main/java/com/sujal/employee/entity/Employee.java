@@ -1,6 +1,10 @@
 package com.sujal.employee.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Employee {
@@ -48,14 +52,17 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @NotBlank(message = "First name is required")
+    @Size(min = 2, max = 50)
     private String firstName;
 
     private String lastName;
 
     @Column(name = "email")
+    @Email
     private String email;
 
+    @Positive
     private Double salary;
 
     public Employee() {
