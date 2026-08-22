@@ -2,6 +2,7 @@ package com.sujal.employee.service;
 
 import com.sujal.employee.dao.EmployeeDAO;
 import com.sujal.employee.entity.Employee;
+import com.sujal.employee.exception.EmployeeValidationException;
 import jakarta.validation.ConstraintViolation;
 
 import java.util.List;
@@ -26,18 +27,21 @@ public class EmployeeService {
 
         if (!violations.isEmpty()) {
 
-            System.out.println("Employee validation failed:");
+            StringBuilder message = new StringBuilder(
+                    "Employee validation failed:\n"
+            );
 
             for (ConstraintViolation<Employee> violation : violations) {
-
-                System.out.println(
-                        violation.getPropertyPath()
-                                + " : "
-                                + violation.getMessage()
-                );
+                message.append("- ")
+                        .append(violation.getPropertyPath())
+                        .append(": ")
+                        .append(violation.getMessage())
+                        .append("\n");
             }
 
-            return;
+            throw new EmployeeValidationException(
+                    message.toString()
+            );
         }
 
         employeeDAO.save(employee);

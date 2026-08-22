@@ -1,6 +1,7 @@
 package com.sujal.employee;
 
 import com.sujal.employee.entity.Employee;
+import com.sujal.employee.exception.EmployeeValidationException;
 import com.sujal.employee.service.EmployeeService;
 
 import java.util.List;
@@ -103,24 +104,26 @@ public class Main {
         // employeeService.testRefresh(1L);
 
 
-        // 14. Validation
-       // employeeService.testValidation();
-        Employee employee = new Employee();
+        // ==========================================
+        // 14. CUSTOM VALIDATION EXCEPTION
+        // ==========================================
 
-        employee.setFirstName("Sujal");
-        employee.setLastName("Developer");
-        employee.setEmail("sujal@example.com");
-        employee.setSalary(50000.0);
+        try {
 
-        //employeeService.createEmployee(employee);
-        employee = employeeService.findEmployeeById(1L);
+            Employee employee = new Employee();
 
-        if (employee != null) {
-            employee.setFirstName("Sujal");
-            employee.setEmail("sujal@example.com");
-            employee.setSalary(80000.0);
+            employee.setFirstName("");
+            employee.setLastName("Developer");
+            employee.setEmail("wrong-email");
+            employee.setSalary(-1000.0);
 
-            employeeService.updateEmployee(employee);
+            employeeService.createEmployee(employee);
+
+        } catch (EmployeeValidationException e) {
+
+            System.out.println("Validation Error:");
+            System.out.println(e.getMessage());
         }
+
     }
 }
