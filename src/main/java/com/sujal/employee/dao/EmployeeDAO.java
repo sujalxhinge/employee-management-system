@@ -548,4 +548,23 @@ public class EmployeeDAO {
             );
         }
     }
+    public List<Employee> findByFirstName(String firstName) {
+
+        Session session = HibernateUtil
+                .getSessionFactory()
+                .openSession();
+
+        try {
+
+            return session.createQuery(
+                            "FROM Employee e WHERE e.firstName = :firstName",
+                            Employee.class
+                    )
+                    .setParameter("firstName", firstName)
+                    .getResultList();
+
+        } finally {
+            session.close();
+        }
+    }
 }

@@ -149,4 +149,7 @@ public class EmployeeService {
     public void testValidation() {
         employeeDAO.testValidation();
     }
+    public List<Employee> findEmployeesByFirstName(String firstName) {
+        return employeeDAO.findByFirstName(firstName);
+    }
 }

@@ -108,21 +108,33 @@ public class Main {
         // 14. CUSTOM VALIDATION EXCEPTION
         // ==========================================
 
-        try {
+//        try {
+//
+//            Employee employee = new Employee();
+//
+//            employee.setFirstName("");
+//            employee.setLastName("Developer");
+//            employee.setEmail("wrong-email");
+//            employee.setSalary(-1000.0);
+//
+//            employeeService.createEmployee(employee);
+//
+//        } catch (EmployeeValidationException e) {
+//
+//            System.out.println("Validation Error:");
+//            System.out.println(e.getMessage());
+//        }
+        List<Employee> employees = employeeService.findEmployeesByFirstName("Sujal");
 
-            Employee employee = new Employee();
+        for (Employee employee : employees) {
 
-            employee.setFirstName("");
-            employee.setLastName("Developer");
-            employee.setEmail("wrong-email");
-            employee.setSalary(-1000.0);
-
-            employeeService.createEmployee(employee);
-
-        } catch (EmployeeValidationException e) {
-
-            System.out.println("Validation Error:");
-            System.out.println(e.getMessage());
+            System.out.println(
+                    employee.getId() + " | " +
+                            employee.getFirstName() + " | " +
+                            employee.getLastName() + " | " +
+                            employee.getEmail() + " | " +
+                            employee.getSalary()
+            );
         }
 
     }
