@@ -152,4 +152,13 @@ public class EmployeeService {
     public List<Employee> findEmployeesByFirstName(String firstName) {
         return employeeDAO.findByFirstName(firstName);
     }
+    public List<Employee> findByEmail(String email) {
+        return employeeDAO.findByEmail(email);
+    }
+    public List<Employee> findBySalaryGreaterThan(Double salary) {
+        return employeeDAO.findBySalaryGreaterThan(salary);
+    }
+    public List<Employee> findByFirstNameContaining(String keyword) {
+        return employeeDAO.findByFirstNameContaining(keyword);
+    }
 }

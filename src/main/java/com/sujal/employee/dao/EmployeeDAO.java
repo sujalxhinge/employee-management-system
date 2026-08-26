@@ -557,10 +557,67 @@ public class EmployeeDAO {
         try {
 
             return session.createQuery(
-                            "FROM Employee e WHERE e.firstName = :firstName",
+
+                           " FROM Employee e WHERE e.email = :email",
                             Employee.class
                     )
                     .setParameter("firstName", firstName)
+                    .getResultList();
+
+        } finally {
+            session.close();
+        }
+    }
+    public List<Employee> findByEmail(String email) {
+
+        Session session = HibernateUtil
+                .getSessionFactory()
+                .openSession();
+
+        try {
+            return session.createQuery(
+                            "FROM Employee e WHERE e.email = :email",
+                            Employee.class
+                    )
+                    .setParameter("email", email)
+                    .getResultList();
+
+        } finally {
+            session.close();
+        }
+    }
+    public List<Employee> findBySalaryGreaterThan(Double salary) {
+
+        Session session = HibernateUtil
+                .getSessionFactory()
+                .openSession();
+
+        try {
+
+            return session.createQuery(
+                            "FROM Employee e WHERE e.salary > :salary",
+                            Employee.class
+                    )
+                    .setParameter("salary", salary)
+                    .getResultList();
+
+        } finally {
+            session.close();
+        }
+    }
+    public List<Employee> findByFirstNameContaining(String keyword) {
+
+        Session session = HibernateUtil
+                .getSessionFactory()
+                .openSession();
+
+        try {
+
+            return session.createQuery(
+                            "FROM Employee e WHERE e.firstName LIKE :keyword",
+                            Employee.class
+                    )
+                    .setParameter("keyword", "%" + keyword + "%")
                     .getResultList();
 
         } finally {

@@ -124,7 +124,46 @@ public class Main {
 //            System.out.println("Validation Error:");
 //            System.out.println(e.getMessage());
 //        }
-        List<Employee> employees = employeeService.findEmployeesByFirstName("Sujal");
+//        List<Employee> employees = employeeService.findEmployeesByFirstName("Sujal");
+//
+//        for (Employee employee : employees) {
+//
+//            System.out.println(
+//                    employee.getId() + " | " +
+//                            employee.getFirstName() + " | " +
+//                            employee.getLastName() + " | " +
+//                            employee.getEmail() + " | " +
+//                            employee.getSalary()
+//            );
+//        }
+//        List<Employee> employees = employeeService.findByEmail("sarthak2@example.com");
+//        for (Employee employee : employees){
+//            System.out.println(
+//                    employee.getId() + " | " +
+//                          employee.getFirstName() + " | " +
+//                           employee.getLastName() + " | " +
+//                            employee.getEmail() + " | " +
+//                           employee.getSalary()
+//            );
+//        }
+
+
+//        List<Employee> employees =
+//                employeeService.findBySalaryGreaterThan(50000.0);
+//
+//        for (Employee employee : employees) {
+//
+//            System.out.println(
+//                    employee.getId() + " | " +
+//                            employee.getFirstName() + " | " +
+//                            employee.getLastName() + " | " +
+//                            employee.getEmail() + " | " +
+//                            employee.getSalary()
+//            );
+//        }
+
+        List<Employee> employees =
+                employeeService.findByFirstNameContaining("Su");
 
         for (Employee employee : employees) {
 
@@ -136,6 +175,5 @@ public class Main {
                             employee.getSalary()
             );
         }
-
     }
 }
