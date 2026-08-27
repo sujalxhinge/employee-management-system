@@ -162,16 +162,28 @@ public class Main {
 //            );
 //        }
 
+//        List<Employee> employees =
+//                employeeService.findByFirstNameContaining("Su");
+//
+//        for (Employee employee : employees) {
+//
+//            System.out.println(
+//                    employee.getId() + " | " +
+//                            employee.getFirstName() + " | " +
+//                            employee.getLastName() + " | " +
+//                            employee.getEmail() + " | " +
+//                            employee.getSalary()
+//            );
+//        }
+
+
         List<Employee> employees =
-                employeeService.findByFirstNameContaining("Su");
+                employeeService.findEmployeesWithPagination(0, 5);
 
         for (Employee employee : employees) {
-
             System.out.println(
                     employee.getId() + " | " +
                             employee.getFirstName() + " | " +
-                            employee.getLastName() + " | " +
-                            employee.getEmail() + " | " +
                             employee.getSalary()
             );
         }

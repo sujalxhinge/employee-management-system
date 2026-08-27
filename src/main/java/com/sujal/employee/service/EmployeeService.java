@@ -161,4 +161,13 @@ public class EmployeeService {
     public List<Employee> findByFirstNameContaining(String keyword) {
         return employeeDAO.findByFirstNameContaining(keyword);
     }
+    public List<Employee> findEmployeesWithPagination(
+            int page,
+            int pageSize
+    ) {
+        return employeeDAO.findEmployeesWithPagination(
+                page,
+                pageSize
+        );
+    }
 }

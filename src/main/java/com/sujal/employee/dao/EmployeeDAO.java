@@ -624,4 +624,29 @@ public class EmployeeDAO {
             session.close();
         }
     }
+    public List<Employee> findEmployeesWithPagination(
+            int page,
+            int pageSize
+    ) {
+
+        Session session = HibernateUtil
+                .getSessionFactory()
+                .openSession();
+
+        try {
+
+            int offset = page * pageSize;
+
+            return session.createQuery(
+                            "FROM Employee e ORDER BY e.id",
+                            Employee.class
+                    )
+                    .setFirstResult(offset)
+                    .setMaxResults(pageSize)
+                    .getResultList();
+
+        } finally {
+            session.close();
+        }
+    }
 }
