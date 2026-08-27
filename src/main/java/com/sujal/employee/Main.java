@@ -2,6 +2,7 @@ package com.sujal.employee;
 
 import com.sujal.employee.entity.Employee;
 import com.sujal.employee.exception.EmployeeValidationException;
+import com.sujal.employee.pagination.PaginationResult;
 import com.sujal.employee.service.EmployeeService;
 
 import java.util.List;
@@ -177,10 +178,39 @@ public class Main {
 //        }
 
 
-        List<Employee> employees =
-                employeeService.findEmployeesWithPagination(0, 5);
+//        List<Employee> employees =
+//                employeeService.findEmployeesWithPagination(0, 5);
+//
+//        for (Employee employee : employees) {
+//            System.out.println(
+//                    employee.getId() + " | " +
+//                            employee.getFirstName() + " | " +
+//                            employee.getSalary()
+//            );
+//        }
+//
+//
+//        long totalEmployees = employeeService.countEmployees();
+//
+//        System.out.println(
+//                "Total Employees: " + totalEmployees
+//        );
 
-        for (Employee employee : employees) {
+        long totalPages = employeeService.getTotalPages(10);
+
+        System.out.println(
+                "Total Pages: " + totalPages
+        );
+        PaginationResult result =
+                employeeService.getEmployeesPage(0, 5);
+
+        System.out.println("Current Page: " + result.getCurrentPage());
+        System.out.println("Page Size: " + result.getPageSize());
+        System.out.println("Total Employees: " + result.getTotalEmployees());
+        System.out.println("Total Pages: " + result.getTotalPages());
+
+        for (Employee employee : result.getEmployees()) {
+
             System.out.println(
                     employee.getId() + " | " +
                             employee.getFirstName() + " | " +

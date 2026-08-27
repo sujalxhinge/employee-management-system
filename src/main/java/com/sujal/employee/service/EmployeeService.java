@@ -3,6 +3,7 @@ package com.sujal.employee.service;
 import com.sujal.employee.dao.EmployeeDAO;
 import com.sujal.employee.entity.Employee;
 import com.sujal.employee.exception.EmployeeValidationException;
+import com.sujal.employee.pagination.PaginationResult;
 import jakarta.validation.ConstraintViolation;
 
 import java.util.List;
@@ -168,6 +169,34 @@ public class EmployeeService {
         return employeeDAO.findEmployeesWithPagination(
                 page,
                 pageSize
+        );
+    }
+    public long countEmployees() {
+        return employeeDAO.countEmployees();
+    }
+    public long getTotalPages(int pageSize) {
+
+        long totalEmployees = employeeDAO.countEmployees();
+
+        return (totalEmployees + pageSize - 1) / pageSize;
+    }
+    public PaginationResult getEmployeesPage(int page, int pageSize) {
+
+        List<Employee> employees =
+                employeeDAO.findEmployeesWithPagination(page, pageSize);
+
+        long totalEmployees =
+                employeeDAO.countEmployees();
+
+        long totalPages =
+                (totalEmployees + pageSize - 1) / pageSize;
+
+        return new PaginationResult(
+                employees,
+                page,
+                pageSize,
+                totalEmployees,
+                totalPages
         );
     }
 }

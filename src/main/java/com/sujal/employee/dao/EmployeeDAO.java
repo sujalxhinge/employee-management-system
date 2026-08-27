@@ -649,4 +649,21 @@ public class EmployeeDAO {
             session.close();
         }
     }
+    public long countEmployees() {
+
+        Session session = HibernateUtil
+                .getSessionFactory()
+                .openSession();
+
+        try {
+
+            return session.createQuery(
+                    "SELECT COUNT(e) FROM Employee e",
+                    Long.class
+            ).getSingleResult();
+
+        } finally {
+            session.close();
+        }
+    }
 }
