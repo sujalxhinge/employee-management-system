@@ -182,14 +182,20 @@ public class EmployeeService {
     }
     public PaginationResult getEmployeesPage(int page, int pageSize) {
 
-        List<Employee> employees =
-                employeeDAO.findEmployeesWithPagination(page, pageSize);
-
-        long totalEmployees =
-                employeeDAO.countEmployees();
+        long totalEmployees = employeeDAO.countEmployees();
 
         long totalPages =
                 (totalEmployees + pageSize - 1) / pageSize;
+
+        if (page >= totalPages) {
+            page = (int) totalPages - 1;
+        }
+
+        List<Employee> employees =
+                employeeDAO.findEmployeesWithPagination(
+                        page,
+                        pageSize
+                );
 
         return new PaginationResult(
                 employees,

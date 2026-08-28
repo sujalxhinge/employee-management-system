@@ -45,4 +45,11 @@ public class PaginationResult {
     public long getTotalPages() {
         return totalPages;
     }
+    public boolean hasNextPage() {
+        return currentPage < totalPages - 1;
+    }
+
+    public boolean hasPreviousPage() {
+        return currentPage > 0;
+    }
 }

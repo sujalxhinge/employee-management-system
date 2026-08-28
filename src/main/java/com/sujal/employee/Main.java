@@ -202,7 +202,7 @@ public class Main {
                 "Total Pages: " + totalPages
         );
         PaginationResult result =
-                employeeService.getEmployeesPage(0, 5);
+                employeeService.getEmployeesPage(10, 5);
 
         System.out.println("Current Page: " + result.getCurrentPage());
         System.out.println("Page Size: " + result.getPageSize());
@@ -217,5 +217,19 @@ public class Main {
                             employee.getSalary()
             );
         }
+        System.out.println(
+                "Has Next Page: " + result.hasNextPage()
+        );
+
+        System.out.println(
+                "Has Previous Page: " + result.hasPreviousPage()
+        );
+        PaginationResult res =
+                employeeService.getEmployeesPage(0, 5);
+
+        System.out.println("Page: " + res.getCurrentPage());
+        System.out.println("Has Previous: " + res.hasPreviousPage());
+        System.out.println("Has Next: " + res.hasNextPage());
+
     }
 }
