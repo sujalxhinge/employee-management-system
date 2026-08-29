@@ -182,12 +182,20 @@ public class EmployeeService {
     }
     public PaginationResult getEmployeesPage(int page, int pageSize) {
 
+        if (pageSize <= 0) {
+            pageSize = 10;
+        }
+
         long totalEmployees = employeeDAO.countEmployees();
 
         long totalPages =
                 (totalEmployees + pageSize - 1) / pageSize;
 
-        if (page >= totalPages) {
+        if (totalPages == 0) {
+            page = 0;
+        } else if (page < 0) {
+            page = 0;
+        } else if (page >= totalPages) {
             page = (int) totalPages - 1;
         }
 

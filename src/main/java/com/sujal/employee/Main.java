@@ -1,7 +1,6 @@
 package com.sujal.employee;
 
 import com.sujal.employee.entity.Employee;
-import com.sujal.employee.exception.EmployeeValidationException;
 import com.sujal.employee.pagination.PaginationResult;
 import com.sujal.employee.service.EmployeeService;
 
@@ -15,221 +14,357 @@ public class Main {
 
         EmployeeService employeeService = new EmployeeService();
 
-        // ==========================================
-        // HIBERNATE EXPERIMENTS
-        // Run ONE experiment at a time
-        // ==========================================
+        // =====================================================
+        // 1. FIND EMPLOYEE BY ID
+        // =====================================================
 
-        // 1. Find employee by ID
-        // Employee foundEmployee = employeeService.findEmployeeById(1L);
+        /*
+        Employee foundEmployee = employeeService.findEmployeeById(1L);
 
-        // if (foundEmployee != null) {
-        //     System.out.println("Employee found:");
-        //     System.out.println("ID: " + foundEmployee.getId());
-        //     System.out.println("First Name: " + foundEmployee.getFirstName());
-        //     System.out.println("Last Name: " + foundEmployee.getLastName());
-        //     System.out.println("Email: " + foundEmployee.getEmail());
-        //     System.out.println("Salary: " + foundEmployee.getSalary());
-        // } else {
-        //     System.out.println("Employee not found.");
-        // }
+        if (foundEmployee != null) {
 
+            System.out.println("Employee found:");
+            System.out.println("ID: " + foundEmployee.getId());
+            System.out.println("First Name: " + foundEmployee.getFirstName());
+            System.out.println("Last Name: " + foundEmployee.getLastName());
+            System.out.println("Email: " + foundEmployee.getEmail());
+            System.out.println("Salary: " + foundEmployee.getSalary());
 
-        // 2. Find all employees
-        // List<Employee> employees = employeeService.findAllEmployees();
+        } else {
 
-        // for (Employee employee : employees) {
-        //     System.out.println(
-        //             employee.getId() + " | " +
-        //             employee.getFirstName() + " | " +
-        //             employee.getLastName() + " | " +
-        //             employee.getEmail() + " | " +
-        //             employee.getSalary()
-        //     );
-        // }
+            System.out.println("Employee not found.");
+        }
+        */
 
 
-        // 3. Create employee
-        // Employee employee = new Employee();
-        // employee.setFirstName("Santosh");
-        // employee.setLastName("Developer");
-        // employee.setEmail("santosh98@example.com");
-        // employee.setSalary(50000.0);
-        //
-        // employeeService.createEmployee(employee);
+        // =====================================================
+        // 2. FIND ALL EMPLOYEES
+        // =====================================================
+
+        /*
+        List<Employee> employees = employeeService.findAllEmployees();
+
+        for (Employee employee : employees) {
+
+            System.out.println(
+                    employee.getId() + " | " +
+                    employee.getFirstName() + " | " +
+                    employee.getLastName() + " | " +
+                    employee.getEmail() + " | " +
+                    employee.getSalary()
+            );
+        }
+        */
 
 
-        // 4. Update employee
-        // Employee employee = employeeService.findEmployeeById(1L);
-        //
-        // if (employee != null) {
-        //     employee.setSalary(75000.0);
-        //     employee.setEmail("updated@example.com");
-        //     employeeService.updateEmployee(employee);
-        // }
+        // =====================================================
+        // 3. CREATE EMPLOYEE
+        // =====================================================
+
+        /*
+        Employee employee = new Employee();
+
+        employee.setFirstName("Santosh");
+        employee.setLastName("Developer");
+        employee.setEmail("santosh98@example.com");
+        employee.setSalary(50000.0);
+
+        employeeService.createEmployee(employee);
+        */
 
 
-        // 5. Delete employee
-        // employeeService.deleteEmployee(9L);
+        // =====================================================
+        // 4. UPDATE EMPLOYEE
+        // =====================================================
+
+        /*
+        Employee employee = employeeService.findEmployeeById(1L);
+
+        if (employee != null) {
+
+            employee.setSalary(75000.0);
+            employee.setEmail("updated@example.com");
+
+            employeeService.updateEmployee(employee);
+        }
+        */
 
 
-        // 6. Dirty checking
-        // employeeService.updateSalaryUsingDirtyChecking(1L, 90000.0);
+        // =====================================================
+        // 5. DELETE EMPLOYEE
+        // =====================================================
+
+        /*
+        employeeService.deleteEmployee(9L);
+        */
 
 
-        // 7. First-level cache
-        // employeeService.testFirstLevelCache(1L);
+        // =====================================================
+        // 6. DIRTY CHECKING
+        // =====================================================
+
+        /*
+        employeeService.updateSalaryUsingDirtyChecking(1L, 90000.0);
+        */
 
 
-        // 8. Session boundary
-        // employeeService.testSessionBoundary(1L);
+        // =====================================================
+        // 7. FIRST LEVEL CACHE
+        // =====================================================
+
+        /*
+        employeeService.testFirstLevelCache(1L);
+        */
 
 
-        // 9. Entity lifecycle
-        // employeeService.testEntityLifecycle();
+        // =====================================================
+        // 8. SESSION BOUNDARY
+        // =====================================================
+
+        /*
+        employeeService.testSessionBoundary(1L);
+        */
 
 
-        // 10. Detach
-        // employeeService.testDetach(1L);
+        // =====================================================
+        // 9. ENTITY LIFECYCLE
+        // =====================================================
+
+        /*
+        employeeService.testEntityLifecycle();
+        */
 
 
-        // 11. Remove lifecycle
-        // employeeService.testRemoveLifecycle(2L);
+        // =====================================================
+        // 10. DETACH
+        // =====================================================
+
+        /*
+        employeeService.testDetach(1L);
+        */
 
 
-        // 12. Clear
-        // employeeService.testClear(1L);
+        // =====================================================
+        // 11. REMOVE LIFECYCLE
+        // =====================================================
+
+        /*
+        employeeService.testRemoveLifecycle(2L);
+        */
 
 
-        // 13. Refresh
-        // employeeService.testRefresh(1L);
+        // =====================================================
+        // 12. CLEAR
+        // =====================================================
+
+        /*
+        employeeService.testClear(1L);
+        */
 
 
-        // ==========================================
-        // 14. CUSTOM VALIDATION EXCEPTION
-        // ==========================================
+        // =====================================================
+        // 13. REFRESH
+        // =====================================================
 
-//        try {
-//
-//            Employee employee = new Employee();
-//
-//            employee.setFirstName("");
-//            employee.setLastName("Developer");
-//            employee.setEmail("wrong-email");
-//            employee.setSalary(-1000.0);
-//
-//            employeeService.createEmployee(employee);
-//
-//        } catch (EmployeeValidationException e) {
-//
-//            System.out.println("Validation Error:");
-//            System.out.println(e.getMessage());
-//        }
-//        List<Employee> employees = employeeService.findEmployeesByFirstName("Sujal");
-//
-//        for (Employee employee : employees) {
-//
-//            System.out.println(
-//                    employee.getId() + " | " +
-//                            employee.getFirstName() + " | " +
-//                            employee.getLastName() + " | " +
-//                            employee.getEmail() + " | " +
-//                            employee.getSalary()
-//            );
-//        }
-//        List<Employee> employees = employeeService.findByEmail("sarthak2@example.com");
-//        for (Employee employee : employees){
-//            System.out.println(
-//                    employee.getId() + " | " +
-//                          employee.getFirstName() + " | " +
-//                           employee.getLastName() + " | " +
-//                            employee.getEmail() + " | " +
-//                           employee.getSalary()
-//            );
-//        }
+        /*
+        employeeService.testRefresh(1L);
+        */
 
 
-//        List<Employee> employees =
-//                employeeService.findBySalaryGreaterThan(50000.0);
-//
-//        for (Employee employee : employees) {
-//
-//            System.out.println(
-//                    employee.getId() + " | " +
-//                            employee.getFirstName() + " | " +
-//                            employee.getLastName() + " | " +
-//                            employee.getEmail() + " | " +
-//                            employee.getSalary()
-//            );
-//        }
+        // =====================================================
+        // 14. VALIDATION
+        // =====================================================
 
-//        List<Employee> employees =
-//                employeeService.findByFirstNameContaining("Su");
-//
-//        for (Employee employee : employees) {
-//
-//            System.out.println(
-//                    employee.getId() + " | " +
-//                            employee.getFirstName() + " | " +
-//                            employee.getLastName() + " | " +
-//                            employee.getEmail() + " | " +
-//                            employee.getSalary()
-//            );
-//        }
+        /*
+        employeeService.testValidation();
+        */
 
 
-//        List<Employee> employees =
-//                employeeService.findEmployeesWithPagination(0, 5);
-//
-//        for (Employee employee : employees) {
-//            System.out.println(
-//                    employee.getId() + " | " +
-//                            employee.getFirstName() + " | " +
-//                            employee.getSalary()
-//            );
-//        }
-//
-//
-//        long totalEmployees = employeeService.countEmployees();
-//
-//        System.out.println(
-//                "Total Employees: " + totalEmployees
-//        );
+        // =====================================================
+        // 15. FIND BY FIRST NAME
+        // =====================================================
 
-        long totalPages = employeeService.getTotalPages(10);
+        /*
+        List<Employee> employees =
+                employeeService.findEmployeesByFirstName("Sujal");
+
+        for (Employee employee : employees) {
+
+            System.out.println(
+                    employee.getId() + " | " +
+                    employee.getFirstName() + " | " +
+                    employee.getLastName() + " | " +
+                    employee.getEmail() + " | " +
+                    employee.getSalary()
+            );
+        }
+        */
+
+
+        // =====================================================
+        // 16. FIND BY EMAIL
+        // =====================================================
+
+        /*
+        List<Employee> employees =
+                employeeService.findByEmail("sarthak2@example.com");
+
+        for (Employee employee : employees) {
+
+            System.out.println(
+                    employee.getId() + " | " +
+                    employee.getFirstName() + " | " +
+                    employee.getLastName() + " | " +
+                    employee.getEmail() + " | " +
+                    employee.getSalary()
+            );
+        }
+        */
+
+
+        // =====================================================
+        // 17. SALARY GREATER THAN
+        // =====================================================
+
+        /*
+        List<Employee> employees =
+                employeeService.findBySalaryGreaterThan(50000.0);
+
+        for (Employee employee : employees) {
+
+            System.out.println(
+                    employee.getId() + " | " +
+                    employee.getFirstName() + " | " +
+                    employee.getLastName() + " | " +
+                    employee.getEmail() + " | " +
+                    employee.getSalary()
+            );
+        }
+        */
+
+
+        // =====================================================
+        // 18. FIRST NAME CONTAINING
+        // =====================================================
+
+        /*
+        List<Employee> employees =
+                employeeService.findByFirstNameContaining("Su");
+
+        for (Employee employee : employees) {
+
+            System.out.println(
+                    employee.getId() + " | " +
+                    employee.getFirstName() + " | " +
+                    employee.getLastName() + " | " +
+                    employee.getEmail() + " | " +
+                    employee.getSalary()
+            );
+        }
+        */
+
+
+        // =====================================================
+        // 19. PAGINATION - BASIC
+        // =====================================================
+
+        /*
+        List<Employee> employees =
+                employeeService.findEmployeesWithPagination(0, 5);
+
+        for (Employee employee : employees) {
+
+            System.out.println(
+                    employee.getId() + " | " +
+                    employee.getFirstName() + " | " +
+                    employee.getSalary()
+            );
+        }
+        */
+
+
+        // =====================================================
+        // 20. COUNT EMPLOYEES
+        // =====================================================
+
+        /*
+        long totalEmployees =
+                employeeService.countEmployees();
+
+        System.out.println(
+                "Total Employees: " + totalEmployees
+        );
+        */
+
+
+        // =====================================================
+        // 21. TOTAL PAGES
+        // =====================================================
+
+        /*
+        long totalPages =
+                employeeService.getTotalPages(10);
 
         System.out.println(
                 "Total Pages: " + totalPages
         );
-        PaginationResult result =
-                employeeService.getEmployeesPage(10, 5);
+        */
 
-        System.out.println("Current Page: " + result.getCurrentPage());
-        System.out.println("Page Size: " + result.getPageSize());
-        System.out.println("Total Employees: " + result.getTotalEmployees());
-        System.out.println("Total Pages: " + result.getTotalPages());
+
+        // =====================================================
+        // 22. PAGINATION RESULT
+        // =====================================================
+
+        PaginationResult result =
+                employeeService.getEmployeesPage(0, 5);
+
+        System.out.println();
+        System.out.println("========== PAGINATION RESULT ==========");
+
+        System.out.println(
+                "Current Page: " +
+                        result.getCurrentPage()
+        );
+
+        System.out.println(
+                "Page Size: " +
+                        result.getPageSize()
+        );
+
+        System.out.println(
+                "Total Employees: " +
+                        result.getTotalEmployees()
+        );
+
+        System.out.println(
+                "Total Pages: " +
+                        result.getTotalPages()
+        );
+
+        System.out.println(
+                "Has Next Page: " +
+                        result.hasNextPage()
+        );
+
+        System.out.println(
+                "Has Previous Page: " +
+                        result.hasPreviousPage()
+        );
+
+        System.out.println();
+        System.out.println("Employees on Current Page:");
 
         for (Employee employee : result.getEmployees()) {
 
             System.out.println(
                     employee.getId() + " | " +
                             employee.getFirstName() + " | " +
+                            employee.getLastName() + " | " +
+                            employee.getEmail() + " | " +
                             employee.getSalary()
             );
         }
-        System.out.println(
-                "Has Next Page: " + result.hasNextPage()
-        );
 
-        System.out.println(
-                "Has Previous Page: " + result.hasPreviousPage()
-        );
-        PaginationResult res =
-                employeeService.getEmployeesPage(0, 5);
-
-        System.out.println("Page: " + res.getCurrentPage());
-        System.out.println("Has Previous: " + res.hasPreviousPage());
-        System.out.println("Has Next: " + res.hasNextPage());
-
+        System.out.println("========================================");
     }
 }
