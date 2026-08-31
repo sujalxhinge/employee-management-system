@@ -666,4 +666,20 @@ public class EmployeeDAO {
             session.close();
         }
     }
+    public List<Employee> findEmployeesOrderBySalaryDesc() {
+
+        Session session =
+                HibernateUtil.getSessionFactory().openSession();
+
+        try {
+
+            return session.createQuery(
+                    "FROM Employee e ORDER BY e.salary DESC",
+                    Employee.class
+            ).getResultList();
+
+        } finally {
+            session.close();
+        }
+    }
 }

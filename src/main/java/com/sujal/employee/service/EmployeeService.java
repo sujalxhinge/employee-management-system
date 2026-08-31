@@ -213,4 +213,7 @@ public class EmployeeService {
                 totalPages
         );
     }
+    public List<Employee> findEmployeesOrderBySalaryDesc() {
+        return employeeDAO.findEmployeesOrderBySalaryDesc();
+    }
 }

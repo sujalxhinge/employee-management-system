@@ -315,56 +315,66 @@ public class Main {
         // 22. PAGINATION RESULT
         // =====================================================
 
-        PaginationResult result =
-                employeeService.getEmployeesPage(0, 5);
+//        PaginationResult result =
+//                employeeService.getEmployeesPage(0, 5);
+//
+//        System.out.println();
+//        System.out.println("========== PAGINATION RESULT ==========");
+//
+//        System.out.println(
+//                "Current Page: " +
+//                        result.getCurrentPage()
+//        );
+//
+//        System.out.println(
+//                "Page Size: " +
+//                        result.getPageSize()
+//        );
+//
+//        System.out.println(
+//                "Total Employees: " +
+//                        result.getTotalEmployees()
+//        );
+//
+//        System.out.println(
+//                "Total Pages: " +
+//                        result.getTotalPages()
+//        );
+//
+//        System.out.println(
+//                "Has Next Page: " +
+//                        result.hasNextPage()
+//        );
+//
+//        System.out.println(
+//                "Has Previous Page: " +
+//                        result.hasPreviousPage()
+//        );
+//
+//        System.out.println();
+//        System.out.println("Employees on Current Page:");
+//
+//        for (Employee employee : result.getEmployees()) {
+//
+//            System.out.println(
+//                    employee.getId() + " | " +
+//                            employee.getFirstName() + " | " +
+//                            employee.getLastName() + " | " +
+//                            employee.getEmail() + " | " +
+//                            employee.getSalary()
+//            );
+//        }
+//
+//        System.out.println("========================================");
+        List<Employee> employees =
+                employeeService.findEmployeesOrderBySalaryDesc();
 
-        System.out.println();
-        System.out.println("========== PAGINATION RESULT ==========");
-
-        System.out.println(
-                "Current Page: " +
-                        result.getCurrentPage()
-        );
-
-        System.out.println(
-                "Page Size: " +
-                        result.getPageSize()
-        );
-
-        System.out.println(
-                "Total Employees: " +
-                        result.getTotalEmployees()
-        );
-
-        System.out.println(
-                "Total Pages: " +
-                        result.getTotalPages()
-        );
-
-        System.out.println(
-                "Has Next Page: " +
-                        result.hasNextPage()
-        );
-
-        System.out.println(
-                "Has Previous Page: " +
-                        result.hasPreviousPage()
-        );
-
-        System.out.println();
-        System.out.println("Employees on Current Page:");
-
-        for (Employee employee : result.getEmployees()) {
+        for (Employee employee : employees) {
 
             System.out.println(
-                    employee.getId() + " | " +
-                            employee.getFirstName() + " | " +
-                            employee.getLastName() + " | " +
-                            employee.getEmail() + " | " +
+                    employee.getFirstName() + " | " +
                             employee.getSalary()
             );
         }
-
-        System.out.println("========================================");
     }
 }
