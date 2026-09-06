@@ -1,5 +1,6 @@
 package com.sujal.employee;
 
+import com.sujal.employee.dto.EmployeeSalaryDTO;
 import com.sujal.employee.entity.Employee;
 import com.sujal.employee.pagination.PaginationResult;
 import com.sujal.employee.service.EmployeeService;
@@ -365,11 +366,24 @@ public class Main {
 //            );
 //        }
 //
-//        System.out.println("========================================");
-        List<Employee> employees =
-                employeeService.findEmployeesOrderBySalaryDesc();
 
-        for (Employee employee : employees) {
+
+//        System.out.println("========================================");
+//        List<Employee> employees =
+//                employeeService.findEmployeesOrderBySalaryDesc();
+//
+//        for (Employee employee : employees) {
+//
+//            System.out.println(
+//                    employee.getFirstName() + " | " +
+//                            employee.getSalary()
+//            );
+//        }
+
+        List<EmployeeSalaryDTO> employees =
+                employeeService.findEmployeeSalaryDTOsByMinimumSalary(50000.0);
+
+        for (EmployeeSalaryDTO employee : employees) {
 
             System.out.println(
                     employee.getFirstName() + " | " +

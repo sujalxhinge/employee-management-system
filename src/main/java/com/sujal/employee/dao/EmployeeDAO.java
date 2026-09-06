@@ -1,6 +1,7 @@
 package com.sujal.employee.dao;
 
 import com.sujal.employee.config.HibernateUtil;
+import com.sujal.employee.dto.EmployeeSalaryDTO;
 import com.sujal.employee.entity.Employee;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
@@ -677,6 +678,29 @@ public class EmployeeDAO {
                     "FROM Employee e ORDER BY e.salary DESC",
                     Employee.class
             ).getResultList();
+
+        } finally {
+            session.close();
+        }
+    }
+    public List<EmployeeSalaryDTO> findEmployeeSalaryDTOsByMinimumSalary(
+            Double minimumSalary) {
+
+        Session session =
+                HibernateUtil.getSessionFactory().openSession();
+
+        try {
+
+            return session.createQuery(
+                            "SELECT new com.sujal.employee.dto.EmployeeSalaryDTO(" +
+                                    "e.firstName, e.salary) " +
+                                    "FROM Employee e " +
+                                    "WHERE e.salary >= :minimumSalary " +
+                                    "ORDER BY e.salary DESC",
+                            EmployeeSalaryDTO.class
+                    )
+                    .setParameter("minimumSalary", minimumSalary)
+                    .getResultList();
 
         } finally {
             session.close();

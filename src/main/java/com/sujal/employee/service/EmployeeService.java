@@ -1,6 +1,7 @@
 package com.sujal.employee.service;
 
 import com.sujal.employee.dao.EmployeeDAO;
+import com.sujal.employee.dto.EmployeeSalaryDTO;
 import com.sujal.employee.entity.Employee;
 import com.sujal.employee.exception.EmployeeValidationException;
 import com.sujal.employee.pagination.PaginationResult;
@@ -215,5 +216,12 @@ public class EmployeeService {
     }
     public List<Employee> findEmployeesOrderBySalaryDesc() {
         return employeeDAO.findEmployeesOrderBySalaryDesc();
+    }
+    public List<EmployeeSalaryDTO> findEmployeeSalaryDTOsByMinimumSalary(
+            Double minimumSalary) {
+
+        return employeeDAO.findEmployeeSalaryDTOsByMinimumSalary(
+                minimumSalary
+        );
     }
 }
