@@ -45,6 +45,7 @@
             true
         </property>
         <mapping class="com.sujal.employee.entity.Employee"/>
+        <mapping class="com.sujal.employee.entity.Department"/>
 
     </session-factory>
 

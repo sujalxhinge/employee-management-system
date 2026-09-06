@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Employee {
@@ -66,5 +67,17 @@ public class Employee {
     private Double salary;
 
     public Employee() {
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Department department;
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }
