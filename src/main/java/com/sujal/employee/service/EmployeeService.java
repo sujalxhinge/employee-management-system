@@ -224,4 +224,8 @@ public class EmployeeService {
                 minimumSalary
         );
     }
+    public Employee findEmployeeWithDepartment(Long id) {
+
+        return employeeDAO.findEmployeeWithDepartment(id);
+    }
 }

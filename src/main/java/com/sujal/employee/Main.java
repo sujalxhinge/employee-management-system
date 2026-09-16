@@ -402,27 +402,40 @@ public class Main {
 //
 //        departmentService.createDepartment(department);
 
-        DepartmentService departmentService =
-                new DepartmentService();
-
-        Department department = new Department();
-        department.setName("IT");
-
-        departmentService.createDepartment(department);
-
-
+//        DepartmentService departmentService =
+//                new DepartmentService();
+//
+//        Department department = new Department();
+//        department.setName("IT");
+//
+//        departmentService.createDepartment(department);
+//
+//
         EmployeeService employeeService =
                 new EmployeeService();
+//
+//        Employee employee = new Employee();
+//
+//        employee.setFirstName("Sujal");
+//        employee.setLastName("Developer");
+//        employee.setEmail("sujal@example.com");
+//        employee.setSalary(70000.0);
+//
+//        employee.setDepartment(department);
+//
+//        employeeService.createEmployee(employee);
 
-        Employee employee = new Employee();
+        Employee employee =
+                employeeService.findEmployeeWithDepartment(15L);
 
-        employee.setFirstName("Sujal");
-        employee.setLastName("Developer");
-        employee.setEmail("sujal@example.com");
-        employee.setSalary(70000.0);
+        System.out.println(
+                "Employee: " +
+                        employee.getFirstName()
+        );
 
-        employee.setDepartment(department);
-
-        employeeService.createEmployee(employee);
+        System.out.println(
+                "Department: " +
+                        employee.getDepartment().getName()
+        );
     }
 }

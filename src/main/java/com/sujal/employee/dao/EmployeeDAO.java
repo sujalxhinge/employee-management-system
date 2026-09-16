@@ -706,5 +706,21 @@ public class EmployeeDAO {
             session.close();
         }
     }
+    public Employee findEmployeeWithDepartment(Long id) {
+
+        Session session =
+                HibernateUtil.getSessionFactory().openSession();
+
+        try {
+
+            Employee employee =
+                    session.find(Employee.class, id);
+
+            return employee;
+
+        } finally {
+            session.close();
+        }
+    }
 
 }
