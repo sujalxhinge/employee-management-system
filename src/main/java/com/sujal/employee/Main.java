@@ -1,8 +1,10 @@
 package com.sujal.employee;
 
 import com.sujal.employee.dto.EmployeeSalaryDTO;
+import com.sujal.employee.entity.Department;
 import com.sujal.employee.entity.Employee;
 import com.sujal.employee.pagination.PaginationResult;
+import com.sujal.employee.service.DepartmentService;
 import com.sujal.employee.service.EmployeeService;
 
 import java.util.List;
@@ -13,7 +15,7 @@ public class Main {
 
         System.out.println("Starting Employee Management System...");
 
-        EmployeeService employeeService = new EmployeeService();
+        //EmployeeService employeeService = new EmployeeService();
 
         // =====================================================
         // 1. FIND EMPLOYEE BY ID
@@ -379,7 +381,7 @@ public class Main {
 //                            employee.getSalary()
 //            );
 //        }
-
+/*
         List<EmployeeSalaryDTO> employees =
                 employeeService.findEmployeeSalaryDTOsByMinimumSalary(50000.0);
 
@@ -390,5 +392,37 @@ public class Main {
                             employee.getSalary()
             );
         }
+
+ */
+//        DepartmentService departmentService =
+//                new DepartmentService();
+//
+//        Department department = new Department();
+//        department.setName("IT");
+//
+//        departmentService.createDepartment(department);
+
+        DepartmentService departmentService =
+                new DepartmentService();
+
+        Department department = new Department();
+        department.setName("IT");
+
+        departmentService.createDepartment(department);
+
+
+        EmployeeService employeeService =
+                new EmployeeService();
+
+        Employee employee = new Employee();
+
+        employee.setFirstName("Sujal");
+        employee.setLastName("Developer");
+        employee.setEmail("sujal@example.com");
+        employee.setSalary(70000.0);
+
+        employee.setDepartment(department);
+
+        employeeService.createEmployee(employee);
     }
 }
