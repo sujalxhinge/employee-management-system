@@ -2,6 +2,7 @@ package com.sujal.employee.dao;
 
 import com.sujal.employee.config.HibernateUtil;
 import com.sujal.employee.dto.EmployeeSalaryDTO;
+import com.sujal.employee.entity.Department;
 import com.sujal.employee.entity.Employee;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
@@ -717,6 +718,37 @@ public class EmployeeDAO {
                     session.find(Employee.class, id);
 
             return employee;
+
+        } finally {
+            session.close();
+        }
+    }
+    public void testLazyFetching(Long id) {
+
+        Session session =
+                HibernateUtil.getSessionFactory().openSession();
+
+        try {
+
+            Employee employee =
+                    session.find(Employee.class, id);
+
+            System.out.println("Employee loaded.");
+
+            System.out.println(
+                    "Employee Name: " +
+                            employee.getFirstName()
+            );
+
+            System.out.println("Now accessing Department...");
+
+            Department department =
+                    employee.getDepartment();
+
+            System.out.println(
+                    "Department: " +
+                            department.getName()
+            );
 
         } finally {
             session.close();

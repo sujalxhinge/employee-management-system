@@ -228,4 +228,7 @@ public class EmployeeService {
 
         return employeeDAO.findEmployeeWithDepartment(id);
     }
+    public void testLazyFetching(Long id) {
+        employeeDAO.testLazyFetching(id);
+    }
 }

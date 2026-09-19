@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.FetchType;
 
 @Entity
 public class Employee {
@@ -69,7 +70,7 @@ public class Employee {
     public Employee() {
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id")
     private Department department;
 

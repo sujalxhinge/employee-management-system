@@ -425,17 +425,19 @@ public class Main {
 //
 //        employeeService.createEmployee(employee);
 
-        Employee employee =
-                employeeService.findEmployeeWithDepartment(15L);
+//        Employee employee =
+//                employeeService.findEmployeeWithDepartment(15L);
+//
+//        System.out.println(
+//                "Employee: " +
+//                        employee.getFirstName()
+//        );
+//
+//        System.out.println(
+//                "Department: " +
+//                        employee.getDepartment().getName()
+//        );
 
-        System.out.println(
-                "Employee: " +
-                        employee.getFirstName()
-        );
-
-        System.out.println(
-                "Department: " +
-                        employee.getDepartment().getName()
-        );
+        employeeService.testLazyFetching(15L);
     }
 }
